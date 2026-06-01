@@ -21,7 +21,7 @@ class VideoController {
             this.osdElement.style.padding = '15px 25px';
             this.osdElement.style.fontSize = '24px';
             this.osdElement.style.borderRadius = '8px';
-            this.osdElement.style.zIndex = '999999'; // 最高層級確保不被蓋住
+            this.osdElement.style.zIndex = '999999';
             this.osdElement.style.pointerEvents = 'none';
             this.osdElement.style.transition = 'opacity 0.2s';
             this.osdElement.style.opacity = '0';
@@ -156,15 +156,27 @@ class Anime1Strategy {
     }
 
     aggressivePurge() {
+        // 1. 處理帶有特定 class 的可見廣告
         document.querySelectorAll('[class*="__close"], [class*="__closelink"]').forEach(btn => {
             const adContainer = btn.closest('div[style*="z-index"]') || btn.parentElement;
-            if (adContainer) adContainer.remove();
+            if (adContainer && !adContainer.dataset.killed) {
+                adContainer.style.setProperty('display', 'none', 'important');
+                adContainer.dataset.killed = "true";
+            }
         });
 
+        // 2. 處理隱形蓋版廣告 (防止滑鼠閃爍的核心)
         document.querySelectorAll('div, a, iframe').forEach(el => {
-            if (el.id === 'page' || el.id === 'content' || el.id === 'primary' || el.id === 'main' || el.className === 'vframe') return;
+            // 跳過已知正常結構，以及已經被我們「結紮」過的元素
+            if (el.dataset.killed || el.id === 'page' || el.id === 'content' || el.id === 'primary' || el.id === 'main' || el.className === 'vframe') return;
+
             const style = window.getComputedStyle(el);
-            if ((style.position === 'absolute' || style.position === 'fixed') && parseInt(style.zIndex) > 90) el.remove();
+            if ((style.position === 'absolute' || style.position === 'fixed') && parseInt(style.zIndex) > 90) {
+                // 讓它失去靈魂：關閉物理碰撞與透明化
+                el.style.setProperty('pointer-events', 'none', 'important');
+                el.style.setProperty('opacity', '0', 'important');
+                el.dataset.killed = "true";
+            }
         });
     }
 
@@ -234,4 +246,4 @@ const currentDomain = window.location.hostname;
 if (currentDomain.includes('anime1.in')) {
     console.log("[Router] 啟動 Anime1 專用策略");
     new Anime1Strategy().init();
-} 
+}
