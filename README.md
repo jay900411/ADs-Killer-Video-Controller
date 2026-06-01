@@ -1,6 +1,6 @@
-# AD-Killer Video Controller 🎥
+# ADs-Killer Video Controller 🎥
 
-![GitHub Repo stars](https://img.shields.io/github/stars/你的GitHub帳號/Omni-Video-Controller?style=social)
+![GitHub Repo stars](https://img.shields.io/github/stars/你的GitHub帳號/ADs-Killer-Video-Controller?style=social)
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
 
 這是一個具備「高內聚、低耦合」架構的 Chrome 擴充功能。旨在統一各種網頁影音平台（目前僅Anime1 其餘尚未擴充）的播放體驗，賦予原生的快捷鍵控制，並針對特定含有流氓廣告的網站實作了強勢的「疫苗級」廣告防禦機制。
