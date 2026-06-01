@@ -5,10 +5,10 @@
 
 這是一個具備「高內聚、低耦合」架構的 Chrome 擴充功能。旨在統一各種網頁影音平台（如Anime1、尚未擴充）的播放體驗，賦予原生的快捷鍵控制，並針對特定含有流氓廣告的網站實作了強勢的「疫苗級」廣告防禦機制。
 
-> **🌟 如果這個工具改善了你的看片體驗，歡迎點擊右上角 `Star` ⭐️ 給予支持！**
+> **🌟 如果這個工具改善了你的看片體驗，歡迎點擊右上角 `Star` ⭐️ 給予支持！** \
 > **💡 有任何建議或希望支援新網站，歡迎發起 Issue。**
 
-## ✨ 核心特色 (Features)
+## 核心特色 (Features)
 
 ### 1. 通用影片快捷鍵 (Universal Shortcuts)
 * **`Space` (空白鍵)**：暫停 / 播放
@@ -26,14 +26,14 @@
 * **上一頁綁架免疫**：封鎖 `history.pushState` 濫用，保證你的「上一頁」永遠乾淨。
 * **DOM 變動監視**：使用 `MutationObserver` 搭配 Debounce 機制，動態清除亂碼廣告，並在全螢幕時自動休眠釋放 CPU 效能。
 
-## 🏗️ 軟體架構 (Architecture)
+## Architecture
 
 本專案採用 **策略模式 (Strategy Pattern)** 與 **路由器 (Domain Router)** 架構設計，易於後續擴充維護：
 * `VideoController`：封裝影片控制與 OSD 渲染的底層邏輯。
 * `Site Strategies`：針對不同網域 (e.g., `Anime1Strategy`, `NycuE3Strategy`) 實作特定的跨視窗通訊 (IPC) 與 DOM 操作。
 * `inject_*.js`：透過 Manifest V3 `web_accessible_resources` 精準注入 Main World，實現最高權限的廣告腳本覆寫。
 
-## 🚀 安裝指南 (Installation)
+## Installation
 
 本專案尚未上架 Chrome Web Store，請依照以下步驟手動載入：
 1. 點擊本頁面右上角綠色按鈕 **`<> Code`**，選擇 **`Download ZIP`** 並解壓縮。
@@ -41,5 +41,5 @@
 3. 開啟右上角的 **「開發人員模式」**。
 4. 點擊左上角的 **「載入未封裝項目」**，選擇剛剛解壓縮的資料夾即可完成安裝！
 
-## 📄 授權條款 (License)
+## License
 This project is licensed under the MIT License.
